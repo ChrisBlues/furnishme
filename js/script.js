@@ -69,3 +69,21 @@ window.addEventListener('scroll', () => {
     footer.classList.remove('visible');
   }
 });
+
+// Première lettre uniquement de la phrase en majuscule
+function capitalizeSentences(root = document.body) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+
+    while (walker.nextNode()) {
+        const node = walker.currentNode;
+        let text = node.nodeValue;
+
+        // Transforme chaque phrase
+        text = text.replace(/(^\s*[a-z])|([.!?]\s*[a-z])/g, match => match.toUpperCase());
+
+        node.nodeValue = text;
+    }
+}
+
+// Exécute sur tout le site
+capitalizeSentences();
